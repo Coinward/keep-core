@@ -8,7 +8,7 @@ import { TOKEN_GRANT_CONTRACT_NAME } from '../constants/constants'
 import { findIndexAndObject } from '../utils/array.utils'
 import { useTokensPageContext } from '../contexts/TokensPageContext'
 
-const TokenGrantsOverview = (props) => {
+const TokenGrantsOverview = ({delegatedTokens}) => {
   const {
     grants,
     grantTokenBalance,
@@ -18,6 +18,8 @@ const TokenGrantsOverview = (props) => {
     grantWithdrawn,
   } = useTokensPageContext()
   const [selectedGrant, setSelectedGrant] = useState({})
+  const [currentTokenAmount, setCurrentTokenAmount] = useState(0)
+
   const { latestEvent: stakedEvent } = useSubscribeToContractEvent(TOKEN_GRANT_CONTRACT_NAME, 'TokenGrantStaked')
   const { latestEvent: withdrawanEvent } = useSubscribeToContractEvent(TOKEN_GRANT_CONTRACT_NAME, 'TokenGrantWithdrawn')
 
@@ -32,6 +34,27 @@ const TokenGrantsOverview = (props) => {
 
   const onSelect = (selectedItem) => {
     setSelectedGrant(selectedItem)
+    let total
+    console.log("delegatedTokens", delegatedTokens)
+    
+    const result = delegatedTokens.filter((grant) => grant.grantId === selectedItem.id)
+    
+    
+    console.log("result!!!", result)
+    // var totalGrant = result.reduce((total, grant) => {
+      //   return total + grant.amount
+      // })
+      
+      // delegatedTokens.filter((grant) => grant.grantId === selectedItem.id).reduce((total, gr) => {
+        //   console.log("amount ", gr.amount)
+        //   total += gr.amount
+        //   // return total
+        // })
+        
+        
+        
+        // setCurrentTokenAmount(totalGrant.amount)
+        setCurrentTokenAmount(0)
   }
 
   useEffect(() => {
@@ -71,7 +94,7 @@ const TokenGrantsOverview = (props) => {
                 selectedItemComponent={<SelectedGrantDropdown grant={selectedGrant} />}
               />
         }
-        <TokenGrantOverview selectedGrant={selectedGrant} />
+        <TokenGrantOverview selectedGrant={selectedGrant} delegatedTokens={currentTokenAmount}/>
       </div>
     </section>
   )

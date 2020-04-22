@@ -8,7 +8,9 @@ import { useShowMessage, messageType } from './Message'
 import moment from 'moment'
 import { gt } from '../utils/arithmetics.utils'
 
-const TokenGrantOverview = ({ selectedGrant }) => {
+const TokenGrantOverview = ({ selectedGrant, delegatedTokens }) => {
+  console.log("delegations", delegatedTokens)
+
   const { yourAddress, grantContract } = useContext(Web3Context)
   const showMessage = useShowMessage()
   const cliffPeriod = moment
@@ -89,6 +91,14 @@ const TokenGrantOverview = ({ selectedGrant }) => {
           }
         </div>
       </div>
+      <div>
+
+        {selectedGrant.amount}
+      </div>
+      <div>
+
+      {selectedGrant.staked}
+      </div>
       <div className="flex mt-1">
         <div className="flex-1 self-center">
           <CircularProgressBars
@@ -98,7 +108,7 @@ const TokenGrantOverview = ({ selectedGrant }) => {
                 value: selectedGrant.staked,
                 backgroundStroke: '#F8E9D3',
                 color: colors.brown,
-                label: 'Staked',
+                label: 'Staked!!',
               },
             ]}
             withLegend

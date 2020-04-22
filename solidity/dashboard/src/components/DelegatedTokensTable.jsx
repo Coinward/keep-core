@@ -9,12 +9,18 @@ import { DataTable, Column } from './DataTable'
 const DelegatedTokensTable = ({ delegatedTokens, cancelStakeSuccessCallback }) => {
   return (
     <section className="tile">
-      <h3 className="text-grey-60">Delegations</h3>
+      <h3 className="text-grey-60">Delegations11</h3>
+
       <DataTable data={delegatedTokens} itemFieldId="operatorAddress">
         <Column
           header="amount"
           field="amount"
           renderContent={({ amount }) => `${displayAmount(amount)} KEEP`}
+        />
+        <Column
+          header="grantId"
+          field="grantId"
+          renderContent={({ grantId }) => `${grantId}`}
         />
         <Column
           header="status"

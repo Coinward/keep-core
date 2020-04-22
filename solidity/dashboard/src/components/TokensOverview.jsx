@@ -6,6 +6,7 @@ import moment from 'moment'
 const TokensOverview = ({
   undelegationPeriod,
   keepBalance,
+  delegatedTokens,
   stakingBalance,
   pendingUndelegationBalance,
 }) => {
@@ -13,7 +14,8 @@ const TokensOverview = ({
 
   return (
     <section id="tokens-overview" className="tile">
-      <TokenGrantsOverview />
+      {console.log("delegatedTokens!1:", delegatedTokens)}
+      <TokenGrantsOverview delegatedTokens={delegatedTokens} />
       <hr />
       <section>
         <h4 className="text-grey-60">Owned Tokens</h4>
